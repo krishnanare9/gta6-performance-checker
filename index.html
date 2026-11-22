@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#0a0a0a">
+<meta name="theme-color" content="#110e18">
 <meta name="description" content="Compare GTA 6 frame rate, resolution, stability and storage on PS5, PS5 Pro, Xbox Series X, Xbox Series S and PC.">
 <meta property="og:title" content="GTA 6 Performance Checker">
 <meta property="og:description" content="See how GTA VI runs across PlayStation and Xbox, and check the latest PC release status.">
@@ -13,7 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <title>GTA 6 Performance Checker</title>
 <style>
-:root{color-scheme:dark;--bg:#0a0a0a;--surface:#141419;--line:#2d2b34;--pink:#ff2d55;--cyan:#6af3f7;--text:#f7f5f8;--muted:#b6b2bf}
+:root{color-scheme:dark;--bg:#110e18;--surface:#1e1828;--line:#43374e;--pink:#ffabc7;--cyan:#a8e3de;--text:#f4eef8;--muted:#c7bbd1}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font:400 1rem/1.6 Inter,system-ui,sans-serif}
 a{color:var(--cyan);text-underline-offset:.24em}
@@ -127,6 +127,42 @@ footer strong{color:var(--text)}
 .storage-box input{width:100%;color:var(--text);background:var(--bg)}
 .storage-box button{background:var(--cyan);color:var(--bg);font-weight:800}
 .storage-box output{display:block;margin-top:.75rem;color:var(--cyan);font-weight:700}
+
+/* Typography, color, and interaction polish */
+body{font-size:clamp(1rem,.95rem + .24vw,1.125rem);line-height:1.65}
+header{background:#15121d}
+header .wrap{flex-wrap:wrap}
+nav{gap:.45rem clamp(.85rem,2.3vw,1.5rem)}
+nav a{font-size:.875rem}
+h1{font-size:clamp(2.25rem,6.7vw,5.5rem);line-height:1.04;letter-spacing:-.055em;overflow-wrap:anywhere;text-shadow:0 2px 14px #08060e90}
+h1 span{color:var(--pink)}
+h2{font-size:clamp(1.65rem,3.8vw,2.55rem);letter-spacing:-.038em;line-height:1.15}
+h3{letter-spacing:-.025em}
+.hero p{color:#f0e7f5}
+.hero::before{background:linear-gradient(90deg,#0d0915f2 0%,#140f1dd9 49%,#180e2466 100%),linear-gradient(0deg,#0e0a15a8,transparent 62%)}
+.results{background:linear-gradient(145deg,#271d32,var(--surface) 67%)}
+dl div{background:#16111e}
+dt,.caption,.media-copy p,footer{font-size:.875rem}
+dd{font-size:clamp(.925rem,1.2vw,1.05rem)}
+summary{line-height:1.45}
+table{font-size:.925rem}
+thead{background:#261e32}
+.compare-table{font-size:clamp(.875rem,1.3vw,.975rem)}
+.cards button[aria-pressed=true]{background:#362139}
+.cards button,.media-card,.buying-card,.storage-box button{transition:background-color .18s ease,border-color .18s ease,box-shadow .18s ease,transform .18s ease}
+@keyframes content-in{from{opacity:.7;transform:translateY(.4rem)}to{opacity:1;transform:translateY(0)}}
+.hero .wrap,#results h3{animation:content-in .4s ease-out both}
+details[open] p{animation:content-in .23s ease-out both}
+@media(hover:hover) and (pointer:fine){
+  .cards button:hover,.media-card:hover,.buying-card:hover{transform:translateY(-3px);border-color:var(--cyan)}
+  .storage-box button:hover{box-shadow:0 0 0 3px #a8e3de38}
+}
+@media(max-width:600px){.hero::before{background:linear-gradient(90deg,#0d0915ec,#140f1dcb),linear-gradient(0deg,#0e0a15ab,transparent 65%)}}
+@media(max-width:500px){.compare-table th,.compare-table td{padding:.6rem .38rem}}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .cards button:hover,.media-card:hover,.buying-card:hover{transform:none}
+}
 </style>
 </head>
 <body>
