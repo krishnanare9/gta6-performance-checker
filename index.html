@@ -105,10 +105,21 @@ footer strong{color:var(--text)}
 .hardware h4{margin:0 0 .75rem;font-size:1rem}
 .hardware dl{grid-template-columns:repeat(3,minmax(0,1fr));margin-bottom:.6rem}
 @media(max-width:720px){.hardware dl{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+.compare-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem;margin-bottom:1rem}
+.compare-controls label{font-size:.85rem;font-weight:700}
+.compare-controls select{display:block;width:100%;margin-top:.35rem;background:var(--surface);color:var(--text);border:1px solid var(--line);border-radius:.5rem;padding:.6rem;font:inherit}
+.compare-table{min-width:0;table-layout:fixed}
+.compare-table th,.compare-table td{white-space:normal;overflow-wrap:anywhere}
+.proof{margin-top:1.3rem;padding-top:1rem;border-top:1px solid var(--line)}
+.proof h4{margin:0 0 .55rem}
+.proof a{display:inline-flex;align-items:center;gap:.75rem;font-weight:700}
+.proof img{width:88px;height:50px;object-fit:cover;border-radius:.35rem}
+@media(max-width:500px){.compare-table{font-size:.76rem}.compare-table th,.compare-table td{padding:.5rem .35rem}}
 </style>
 </head>
 <body>
-<header><div class="wrap"><a class="brand" href="./">GTA <span>VI</span></a><nav aria-label="Page sections"><a href="#checker">Checker</a><a href="#benchmarks">Benchmarks</a><a href="#videos">Videos</a><a href="#gallery">Gallery</a><a href="#faq">FAQ</a></nav></div></header>
+<header><div class="wrap"><a class="brand" href="./">GTA <span>VI</span></a><nav aria-label="Page sections"><a href="#checker">Checker</a><a href="#compare">Compare</a><a href="#benchmarks">Benchmarks</a><a href="#videos">Videos</a><a href="#gallery">Gallery</a><a href="#faq">FAQ</a></nav></div></header>
 <main>
 <section class="hero" aria-labelledby="title">
 <div class="hero-slides" aria-hidden="true">
@@ -141,9 +152,17 @@ footer strong{color:var(--text)}
 <dl><div><dt>CPU</dt><dd>AMD Zen 2 · 8 cores / 16 threads</dd></div><div><dt>GPU</dt><dd>AMD Radeon RDNA-based · ≈10 TFLOPS</dd></div><div><dt>Memory</dt><dd>16 GB GDDR6</dd></div><div><dt>Built-in SSD</dt><dd>825 GB custom SSD</dd></div><div><dt>Disc drive</dt><dd>4K UHD Blu-ray</dd></div></dl>
 <p class="caption"><span>Original PS5 disc model shown. SSD capacity varies by revision.</span> <a href="https://www.playstation.com/content/dam/global_pdc/en-in/corporate/support/manuals/ps5-docs/1200a/CFI-12XXA_PS5_Safety_Guide%24en-in.pdf">Manufacturer specs</a></p>
 </section>
+<section class="proof" aria-labelledby="proof-title" hidden><h4 id="proof-title">Benchmark video</h4><a href="#"><img alt="" width="88" height="50"><span></span></a><p class="caption"><time datetime="2026-11-18">Published November 18, 2026</time> · Digital Foundry</p></section>
 </div>
 </section>
 <aside class="ad" id="ad-slot-1" aria-label="Advertisement placeholder">AdSense placeholder</aside>
+<section id="compare" aria-labelledby="compare-title" hidden>
+<h2 id="compare-title">Compare two consoles</h2>
+<div class="compare-controls"><label>First console<select id="compare-first"><option value="0" selected>PS5</option><option value="1">PS5 Pro</option><option value="2">Xbox Series X</option><option value="3">Xbox Series S</option></select></label><label>Second console<select id="compare-second"><option value="0">PS5</option><option value="1" selected>PS5 Pro</option><option value="2">Xbox Series X</option><option value="3">Xbox Series S</option></select></label></div>
+<div class="table"><table class="compare-table"><thead><tr><th scope="col">Spec</th><th scope="col"></th><th scope="col"></th></tr></thead>
+<tbody><tr><th scope="row">Target FPS</th><td></td><td></td></tr><tr><th scope="row">Resolution</th><td></td><td></td></tr><tr><th scope="row">Stability</th><td></td><td></td></tr><tr><th scope="row">Observed frame rate</th><td></td><td></td></tr><tr><th scope="row">Frame drops</th><td></td><td></td></tr><tr><th scope="row">CPU</th><td></td><td></td></tr><tr><th scope="row">GPU</th><td></td><td></td></tr><tr><th scope="row">RAM</th><td></td><td></td></tr><tr><th scope="row">Built-in SSD</th><td></td><td></td></tr></tbody></table></div>
+<p class="caption">Observed frame rates come from Digital Foundry’s November 2026 launch tests.</p>
+</section>
 <section id="comparison" aria-labelledby="comparison-title">
 <h2 id="comparison-title">Platform comparison</h2>
 <div class="table" role="region" aria-labelledby="comparison-title" tabindex="0">
@@ -262,6 +281,54 @@ const consoleHardware = [
   ]
 ];
 
+const benchmarkRows = [...document.querySelectorAll('#benchmarks tbody tr')];
+const benchmarkProof = result.querySelector('.proof');
+const proofLink = benchmarkProof.querySelector('a');
+const proofThumbnail = proofLink.querySelector('img');
+const proofLabel = proofLink.querySelector('span');
+const proofVideos = [
+  ['qsBU0bcpONA', 2968, 'PS5 frame-rate analysis · 49:28'],
+  ['qsBU0bcpONA', 2838, 'PS5 Pro frame-rate analysis · 47:18'],
+  ['F3lxGD8HX2k', 0, 'Xbox Series X and Series S technical review'],
+  ['F3lxGD8HX2k', 0, 'Xbox Series X and Series S technical review']
+];
+
+function showBenchmarkProof(platformIndex) {
+  const video = proofVideos[platformIndex];
+  benchmarkProof.hidden = !video;
+  if (!video) return;
+
+  const [id, start, label] = video;
+  proofLink.href = 'https://www.youtube.com/watch?v=' + id + (start ? '&t=' + start + 's' : '');
+  proofThumbnail.src = 'https://i.ytimg.com/vi/' + id + '/hqdefault.jpg';
+  proofLabel.textContent = label;
+}
+
+const comparison = document.querySelector('#compare');
+const comparisonSelectors = [...comparison.querySelectorAll('select')];
+const comparisonHeaders = [...comparison.querySelectorAll('thead th')].slice(1);
+const comparisonRows = [...comparison.querySelectorAll('tbody tr')];
+
+function updateComparison() {
+  comparisonSelectors.forEach((select, column) => {
+    const index = Number(select.value);
+    const [name, , fps, resolution, stability] = platforms[index];
+    const [, observed, drops] = benchmarkRows[index].cells;
+    const values = [fps, resolution, stability, observed.textContent, drops.textContent,
+      ...consoleHardware[index][0].slice(0, 4)];
+
+    comparisonHeaders[column].textContent = name;
+    comparisonRows.forEach((row, rowIndex) => {
+      row.cells[column + 1].textContent = values[rowIndex];
+    });
+  });
+}
+
+comparisonSelectors.forEach(select => select.addEventListener('change', updateComparison));
+updateComparison();
+comparison.hidden = false;
+showBenchmarkProof(0);
+
 buttons.forEach(button => {
   button.addEventListener('click', () => {
     const [name, family, ...specs] = platforms[Number(button.dataset.platform)];
@@ -273,6 +340,7 @@ buttons.forEach(button => {
 
     const consoleSpecs = consoleHardware[Number(button.dataset.platform)];
     hardware.hidden = !consoleSpecs;
+    showBenchmarkProof(Number(button.dataset.platform));
     if (consoleSpecs) {
       const [details, note, source] = consoleSpecs;
       hardwareValues.forEach((value, index) => { value.textContent = details[index]; });
