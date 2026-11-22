@@ -116,10 +116,21 @@ footer strong{color:var(--text)}
 .proof a{display:inline-flex;align-items:center;gap:.75rem;font-weight:700}
 .proof img{width:88px;height:50px;object-fit:cover;border-radius:.35rem}
 @media(max-width:500px){.compare-table{font-size:.76rem}.compare-table th,.compare-table td{padding:.5rem .35rem}}
+
+.buying-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr));gap:1rem}
+.buying-card,.storage-box{background:var(--surface);border:1px solid var(--line);border-radius:.9rem;padding:1.15rem}
+.buying-card h3{line-height:1.2}
+.buying-card p+p,.buying-card h3+p{margin-top:.65rem}
+.storage-box form{display:flex;gap:.7rem;flex-wrap:wrap;align-items:end}
+.storage-box label{display:grid;gap:.3rem;flex:1 1 12rem;font-weight:700}
+.storage-box input,.storage-box button{border:1px solid var(--line);border-radius:.5rem;padding:.55rem .75rem;font:inherit}
+.storage-box input{width:100%;color:var(--text);background:var(--bg)}
+.storage-box button{background:var(--cyan);color:var(--bg);font-weight:800}
+.storage-box output{display:block;margin-top:.75rem;color:var(--cyan);font-weight:700}
 </style>
 </head>
 <body>
-<header><div class="wrap"><a class="brand" href="./">GTA <span>VI</span></a><nav aria-label="Page sections"><a href="#checker">Checker</a><a href="#compare">Compare</a><a href="#benchmarks">Benchmarks</a><a href="#videos">Videos</a><a href="#gallery">Gallery</a><a href="#faq">FAQ</a></nav></div></header>
+<header><div class="wrap"><a class="brand" href="./">GTA <span>VI</span></a><nav aria-label="Page sections"><a href="#checker">Checker</a><a href="#compare">Compare</a><a href="#benchmarks">Benchmarks</a><a href="#videos">Videos</a><a href="#gallery">Gallery</a><a href="#buying-guides">Buying guides</a><a href="#storage-checker">Storage</a><a href="#faq">FAQ</a></nav></div></header>
 <main>
 <section class="hero" aria-labelledby="title">
 <div class="hero-slides" aria-hidden="true">
@@ -209,6 +220,39 @@ footer strong{color:var(--text)}
 <figure class="media-card"><img src="https://www.rockstargames.com/VI/_next/static/media/Jason_and_Lucia_14_Mobile.17zv0lmevzbgs.jpg?akim=1&amp;imwidth=960" alt="Jason and Lucia" width="960" height="540" loading="lazy" decoding="async"><figcaption class="media-copy">Launch Gallery · Rockstar Games</figcaption></figure>
 <figure class="media-card"><img src="https://www.rockstargames.com/VI/_next/static/media/launch-trailer-mobile.11.007xolt5y2.jpg?akim=1&amp;imwidth=960" alt="GTA VI launch trailer still" width="960" height="540" loading="lazy" decoding="async"><figcaption class="media-copy">Launch trailer · Rockstar Games</figcaption></figure>
 </div><p class="caption"><a href="https://www.rockstargames.com/VI/launch-gallery">View Rockstar’s official gallery</a></p>
+</section>
+<section id="buying-guides" aria-labelledby="buying-title">
+<h2 id="buying-title">GTA VI console buying guides</h2>
+<div class="buying-grid">
+<article class="buying-card" id="ps5-vs-ps5-pro">
+<h3>PS5 vs PS5 Pro for GTA VI</h3>
+<p><strong>Already own a PS5? Keep it if your main reason to upgrade is FPS.</strong> Both consoles target 30 FPS. PS5 Pro is worth considering if you care about steadier frame pacing, cleaner detail on a 4K display, and exclusive ray-traced shadows.</p>
+<p>Buying new? Compare the total price including a disc drive if you want physical games. The Pro sells the drive separately.</p>
+<p><a href="#benchmarks">Check launch benchmarks</a> · <a href="https://www.amazon.in/s?k=PS5%20Pro%20console">Check PS5 Pro listings in India</a></p>
+</article>
+<article class="buying-card" id="series-x-vs-series-s">
+<h3>Xbox Series X vs Series S for GTA VI</h3>
+<p><strong>Choose Series X if GTA VI is the main reason you’re buying.</strong> Both target 30 FPS. Launch tests found longer dips on Series S in driving and combat, and it reconstructs a 1080p image from 720p. Series X offers a sharper image and steadier performance.</p>
+<p>Series S can still make sense on a tight budget. Compare the price after including an expansion card if your existing library already fills the SSD.</p>
+<p><a href="#benchmarks">Check launch benchmarks</a> · <a href="https://www.amazon.in/s?k=Xbox%20Series%20X%20console">Check Series X listings in India</a></p>
+</article>
+</div>
+<p class="caption">Store links are standard links. Check the seller, warranty and delivery before buying.</p>
+</section>
+<section id="storage-checker" aria-labelledby="storage-title">
+<h2 id="storage-title">GTA VI storage checker</h2>
+<div class="storage-box">
+<p>Use 212 GB as a planning estimate. Actual install size can vary by console and patch. Leave extra room for updates.</p>
+<form id="storage-form">
+<label>Free space on your console (GB)<input id="free-space" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 250" required></label>
+<button type="submit">Check free space</button>
+</form>
+<output id="storage-result" for="free-space" aria-live="polite"></output>
+</div>
+<div class="buying-grid">
+<article class="buying-card"><h3>PS5 and PS5 Pro storage</h3><p>Look for a compatible PCIe Gen4 x4 M.2 NVMe SSD with a heatsink. Sony recommends at least 5,500 MB/s sequential read speed. Check physical dimensions before buying.</p><p><a href="https://www.playstation.com/en-us/support/hardware/ps5-install-m2-ssd/">Sony’s SSD requirements</a> · <a href="https://www.amazon.in/s?k=PS5%20M.2%20NVMe%20SSD%20heatsink%201TB">Browse SSD listings</a></p></article>
+<article class="buying-card"><h3>Xbox Series X and Series S storage</h3><p>Use an Xbox Series X|S Storage Expansion Card to play optimized games from expanded storage. Use USB storage to archive optimized games and move them back when needed.</p><p><a href="https://news.xbox.com/en-us/2020/09/24/xbox-series-x-and-xbox-series-s-custom-storage-solution-primer/">Xbox storage guide</a> · <a href="https://www.amazon.in/s?k=Xbox%20Series%20X%20S%20storage%20expansion%20card">Browse expansion cards</a></p></article>
+</div>
 </section>
 <section id="faq" aria-labelledby="faq-title">
 <h2 id="faq-title">Frequently asked questions</h2>
@@ -380,6 +424,28 @@ slideToggle.addEventListener('click', () => {
   const paused = hero.classList.toggle('is-paused');
   slideToggle.textContent = paused ? 'Play slideshow' : 'Pause slideshow';
 });
+
+const storageForm = document.querySelector('#storage-form');
+const freeSpace = document.querySelector('#free-space');
+const storageResult = document.querySelector('#storage-result');
+const formatSpace = new Intl.NumberFormat('en-IN', { maximumFractionDigits: 3 });
+
+storageForm.addEventListener('submit', event => {
+  event.preventDefault();
+  const available = freeSpace.valueAsNumber;
+  if (!Number.isFinite(available) || available < 0) return;
+
+  const remaining = available - 212;
+  const amount = formatSpace.format(Math.abs(remaining));
+  if (remaining < 0) {
+    storageResult.textContent = 'Free up about ' + amount + ' GB to reach the 212 GB estimate.';
+  } else if (remaining === 0) {
+    storageResult.textContent = 'You meet the 212 GB estimate. Free up extra space for updates.';
+  } else {
+    storageResult.textContent = 'About ' + amount + ' GB would remain after a 212 GB install.';
+  }
+});
+freeSpace.addEventListener('input', () => { storageResult.textContent = ''; });
 </script>
 </body>
 </html>
