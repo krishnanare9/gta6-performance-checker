@@ -70,10 +70,29 @@ footer p+p{margin-top:.65rem}
 footer strong{color:var(--text)}
 @media(max-width:720px){.cards{grid-template-columns:repeat(3,minmax(0,1fr))}dl{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:390px){.wrap{width:calc(100% - 2rem)}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+.cards button{padding:.55rem .55rem .7rem}
+.cards img{display:block;width:100%;height:100px;object-fit:contain;background:#e3e4e9;border-radius:.45rem;margin-bottom:.55rem}
+.cards small,.cards strong{padding-inline:.25rem}
+.media-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.85rem}
+.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
+.media-card{min-width:0;margin:0;overflow:hidden;background:var(--surface);border:1px solid var(--line);border-radius:.85rem}
+.media-card img,.player iframe{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#221323;border:0}
+.gallery img{object-position:center 40%}
+.media-copy{padding:.85rem 1rem}
+.media-copy h3{font-size:1.06rem;line-height:1.35}
+.media-copy p{color:var(--muted);font-size:.86rem;margin:.35rem 0}
+.player{position:relative}
+.video-play{display:grid;place-items:center;width:100%;border:0;padding:0;background:#1a1420}
+.video-play img,.video-play span{grid-area:1/1}
+.video-play span{z-index:1;border-radius:1rem;background:#ba1739;color:#fff;font-weight:800;padding:.4rem .85rem}
+.video-play:hover span{background:#95102e}
+@media(max-width:720px){.media-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:500px){.media-grid{grid-template-columns:minmax(0,1fr)}header .wrap{flex-wrap:wrap}.cards img{height:76px}}
 </style>
 </head>
 <body>
-<header><div class="wrap"><a class="brand" href="./">GTA <span>VI</span></a><nav aria-label="Page sections"><a href="#checker">Checker</a><a href="#comparison">Comparison</a><a href="#faq">FAQ</a></nav></div></header>
+<header><div class="wrap"><a class="brand" href="./">GTA <span>VI</span></a><nav aria-label="Page sections"><a href="#checker">Checker</a><a href="#benchmarks">Benchmarks</a><a href="#videos">Videos</a><a href="#gallery">Gallery</a><a href="#faq">FAQ</a></nav></div></header>
 <main>
 <section class="hero" aria-labelledby="title"><div class="wrap">
 <time datetime="2026-11-22">Updated November 22, 2026</time>
@@ -84,11 +103,11 @@ footer strong{color:var(--text)}
 <section id="checker" aria-labelledby="checker-title">
 <h2 id="checker-title">Choose your platform</h2>
 <div class="cards" role="group" aria-label="Platforms">
-<button type="button" aria-pressed="true" aria-controls="results" data-platform="0"><small>PlayStation</small>PS5</button>
-<button type="button" aria-pressed="false" aria-controls="results" data-platform="1"><small>PlayStation</small>PS5 Pro</button>
-<button type="button" aria-pressed="false" aria-controls="results" data-platform="2"><small>Xbox</small>Xbox Series X</button>
-<button type="button" aria-pressed="false" aria-controls="results" data-platform="3"><small>Xbox</small>Xbox Series S</button>
-<button type="button" aria-pressed="false" aria-controls="results" data-platform="4"><small>Windows</small>PC</button>
+<button type="button" aria-pressed="true" aria-controls="results" data-platform="0"><img src="https://store.sony.co.nz/on/demandware.static/-/Sites-sony-master-catalog/default/dw1b537bbb/images/PLAYSTATION5W/PLAYSTATION5W.png" alt="" width="220" height="100" decoding="async"><small>PlayStation</small><strong>PS5</strong></button>
+<button type="button" aria-pressed="false" aria-controls="results" data-platform="1"><img src="https://multimedia.bbycastatic.ca/multimedia/products/1500x1500/184/18477/18477929.jpg" alt="" width="220" height="100" decoding="async"><small>PlayStation</small><strong>PS5 Pro</strong></button>
+<button type="button" aria-pressed="false" aria-controls="results" data-platform="2"><img src="https://cdn.grupoelcorteingles.es/SGFM/dctm/MEDIA03/202009/21/00194482000018____5__1200x1200.jpg" alt="" width="220" height="100" decoding="async"><small>Xbox</small><strong>Xbox Series X</strong></button>
+<button type="button" aria-pressed="false" aria-controls="results" data-platform="3"><img src="https://assets.xboxservices.com/assets/07/a9/07a93846-20c6-4ccd-9b0a-88718a99f894.png?n=389964_Hero-Gallery-0_A2_857x676.png" alt="" width="220" height="100" decoding="async"><small>Xbox</small><strong>Xbox Series S</strong></button>
+<button type="button" aria-pressed="false" aria-controls="results" data-platform="4"><img src="https://www.scan.co.uk/images/products/xlarge/3126280-xl-a.jpg" alt="" width="220" height="100" decoding="async"><small>Windows</small><strong>PC</strong></button>
 </div>
 <div class="results" id="results" aria-live="polite" aria-atomic="true">
 <span class="eyebrow">PlayStation</span><h3>PS5</h3>
@@ -102,12 +121,47 @@ footer strong{color:var(--text)}
 <div class="table" role="region" aria-labelledby="comparison-title" tabindex="0">
 <table><thead><tr><th scope="col">Platform</th><th scope="col">Target FPS</th><th scope="col">Resolution</th><th scope="col">Stability</th><th scope="col">Storage</th><th scope="col">Key features and notes</th></tr></thead>
 <tbody><tr><th scope="row">PS5</th><td>30 FPS</td><td>≈1440p → 4K</td><td>Mostly steady</td><td>Up to 212 GB</td><td>Rockstar’s temporal upscaling reconstructs a 4K image. Independent testing reported occasional minor dips.</td></tr>
-<tr><th scope="row">PS5 Pro</th><td>30 FPS</td><td>4K output via PSSR</td><td>Mostly steady</td><td>Up to 212 GB</td><td>PlayStation Spectral Super Resolution improves image clarity. PS5 Pro also adds exclusive ray-traced shadows.</td></tr>
+<tr><th scope="row">PS5 Pro</th><td>30 FPS</td><td>≈1440p → 4K via PSSR 2</td><td>Mostly steady</td><td>Up to 212 GB</td><td>PlayStation Spectral Super Resolution improves image clarity. PS5 Pro also adds exclusive ray-traced shadows.</td></tr>
 <tr><th scope="row">Xbox Series X</th><td>30 FPS</td><td>≈1440p → 4K</td><td>Mostly steady</td><td>Up to 212 GB</td><td>Rockstar’s temporal upscaling reconstructs a 4K image. Independent testing reported occasional minor dips.</td></tr>
 <tr><th scope="row">Xbox Series S</th><td>30 FPS</td><td>720p → 1080p</td><td>More variable</td><td>Up to 212 GB</td><td>AMD FidelityFX Super Resolution (FSR) upscales to 1080p. Expect a softer image and more frequent frame-rate dips.</td></tr>
 <tr><th scope="row">PC</th><td>Unknown</td><td>Unknown</td><td>Unknown</td><td>Unknown</td><td>Rockstar has yet to announce a PC version, release date or system requirements.</td></tr></tbody></table>
 </div>
-<p class="caption">Resolution shows internal render resolution and upscaled output where both are available. Stability reflects launch testing and can vary by scene or patch.</p>
+<p class="caption">Resolution shows internal render resolution and upscaled output where both are available. Stability reflects launch testing and can vary by scene or patch.</p><p class="caption">Hardware photos: Sony, Best Buy, El Corte Inglés, Microsoft and Scan. The PC image is illustrative.</p>
+</section>
+<section id="benchmarks" aria-labelledby="benchmarks-title">
+<h2 id="benchmarks-title">Launch performance benchmarks</h2>
+<div class="table" role="region" aria-labelledby="benchmarks-title" tabindex="0">
+<table><thead><tr><th scope="col">Platform</th><th scope="col">Observed frame rate</th><th scope="col">Demanding scenes</th><th scope="col">Upscaling</th></tr></thead>
+<tbody><tr><th scope="row">PS5</th><td>Usually near 30 FPS</td><td>Minor driving dips and longer drops in heavy combat stress tests.</td><td>Rockstar TAA</td></tr>
+<tr><th scope="row">PS5 Pro</th><td>Near 30 FPS with consistent pacing</td><td>About 24 FPS in the harshest reported stress test. The reviewer reported over 50 hours without seeing a dip outside stress tests.</td><td>PSSR 2</td></tr>
+<tr><th scope="row">Xbox Series X</th><td>Usually near 30 FPS (≈33 ms per frame)</td><td>Occasional dips in busy chases or fights.</td><td>Rockstar TAA</td></tr>
+<tr><th scope="row">Xbox Series S</th><td>Mid-20s in several driving and combat scenes</td><td>Around 20 FPS in especially demanding scenes. Cutscenes and walking generally held up better.</td><td>AMD FSR 4</td></tr>
+<tr><th scope="row">PC</th><td>Unavailable</td><td>Rockstar has yet to announce a PC version.</td><td>—</td></tr></tbody></table>
+</div>
+<p class="caption">Digital Foundry’s November 2026 tests covered gameplay and deliberately demanding scenes. The figures describe those runs. Averages and 1% lows are unavailable from these sources. <a href="https://www.videogameschronicle.com/news/gta-6-base-ps5-performance-analysis-shows-struggle-to-maintain-30-fps-at-all-times/">PlayStation analysis</a> · <a href="https://www.videogameschronicle.com/news/gta-6-xbox-series-s-performance-analysis-admires-the-effort-but-says-significant-frame-drops-are-a-problem/">Xbox analysis</a></p>
+</section>
+<section id="videos" aria-labelledby="videos-title">
+<h2 id="videos-title">Benchmark videos</h2>
+<div class="media-grid">
+<article class="media-card"><div class="player">
+<button class="video-play" type="button" data-video="qsBU0bcpONA" data-start="2838" aria-label="Play PS5 and PS5 Pro technical review">
+<img src="https://i.ytimg.com/vi/qsBU0bcpONA/hqdefault.jpg" alt="" width="480" height="270" loading="lazy" decoding="async"><span aria-hidden="true">▶ Play</span></button>
+</div><div class="media-copy"><h3>PS5 and PS5 Pro technical review</h3><p>Frame pacing, stress tests and the base PS5 comparison.</p><a href="https://www.youtube.com/watch?v=qsBU0bcpONA&amp;t=2838s">Watch on YouTube</a></div></article>
+<article class="media-card"><div class="player">
+<button class="video-play" type="button" data-video="F3lxGD8HX2k" data-start="0" aria-label="Play Xbox Series X and Series S technical review">
+<img src="https://i.ytimg.com/vi/F3lxGD8HX2k/hqdefault.jpg" alt="" width="480" height="270" loading="lazy" decoding="async"><span aria-hidden="true">▶ Play</span></button>
+</div><div class="media-copy"><h3>Xbox Series X and Series S technical review</h3><p>Frame rates and image quality across both Xbox consoles.</p><a href="https://www.youtube.com/watch?v=F3lxGD8HX2k">Watch on YouTube</a></div></article>
+<article class="media-card"><div class="player">
+<button class="video-play" type="button" data-video="Nmn2ibJAOhc" data-start="0" aria-label="Play PS5 vs PS5 Pro performance highlights">
+<img src="https://i.ytimg.com/vi/Nmn2ibJAOhc/hqdefault.jpg" alt="" width="480" height="270" loading="lazy" decoding="async"><span aria-hidden="true">▶ Play</span></button>
+</div><div class="media-copy"><h3>PS5 vs PS5 Pro performance highlights</h3><p>A shorter walkthrough of the PlayStation benchmark from DF Clips.</p><a href="https://www.youtube.com/watch?v=Nmn2ibJAOhc">Watch on YouTube</a></div></article>
+</div></section>
+<section id="gallery" aria-labelledby="gallery-title">
+<h2 id="gallery-title">GTA VI gallery</h2>
+<div class="media-grid gallery">
+<figure class="media-card"><img src="https://www.rockstargames.com/VI/_next/static/media/Jason_and_Lucia_14_Mobile.17zv0lmevzbgs.jpg?akim=1&amp;imwidth=960" alt="Jason and Lucia" width="960" height="540" loading="lazy" decoding="async"><figcaption class="media-copy">Launch Gallery · Rockstar Games</figcaption></figure>
+<figure class="media-card"><img src="https://www.rockstargames.com/VI/_next/static/media/launch-trailer-mobile.11.007xolt5y2.jpg?akim=1&amp;imwidth=960" alt="GTA VI launch trailer still" width="960" height="540" loading="lazy" decoding="async"><figcaption class="media-copy">Launch trailer · Rockstar Games</figcaption></figure>
+</div><p class="caption"><a href="https://www.rockstargames.com/VI/launch-gallery">View Rockstar’s official gallery</a></p>
 </section>
 <section id="faq" aria-labelledby="faq-title">
 <h2 id="faq-title">Frequently asked questions</h2>
@@ -125,7 +179,7 @@ footer strong{color:var(--text)}
 <p>Sources &middot; <a href="https://www.rockstargames.com/VI/out-now">Rockstar Games</a> &middot; <a href="https://www.videogameschronicle.com/news/rockstar-confirms-gta-6-targets-30-fps-with-ps5-pro-exclusive-ray-tracing/">Frame-rate targets</a> &middot; <a href="https://www.tomshardware.com/video-games/console-gaming/gta-vi-runs-at-1440p-on-ps5-and-xbox-series-x-but-just-720p-with-upscaling-on-series-s-rockstar-details-upscaling-technologies-for-launch">Resolution</a> &middot; <a href="https://www.gamesradar.com/games/grand-theft-auto/gta-6-at-60fps-on-ps5-pro-isnt-possible-because-the-console-is-not-powerful-enough-rockstar-says/">Stability and 60 FPS</a> &middot; <a href="https://gtaplaybook.com/gta6/answers/file-size/">Storage</a></p>
 </div></footer>
 <script>
-const platforms = [["PS5","PlayStation","30 FPS","≈1440p → 4K","Mostly steady","Up to 212 GB","Rockstar’s temporal upscaling reconstructs a 4K image. Independent testing reported occasional minor dips."],["PS5 Pro","PlayStation","30 FPS","4K output via PSSR","Mostly steady","Up to 212 GB","PlayStation Spectral Super Resolution improves image clarity. PS5 Pro also adds exclusive ray-traced shadows."],["Xbox Series X","Xbox","30 FPS","≈1440p → 4K","Mostly steady","Up to 212 GB","Rockstar’s temporal upscaling reconstructs a 4K image. Independent testing reported occasional minor dips."],["Xbox Series S","Xbox","30 FPS","720p → 1080p","More variable","Up to 212 GB","AMD FidelityFX Super Resolution (FSR) upscales to 1080p. Expect a softer image and more frequent frame-rate dips."],["PC","Windows","Unknown","Unknown","Unknown","Unknown","Rockstar has yet to announce a PC version, release date or system requirements."]];
+const platforms = [["PS5","PlayStation","30 FPS","≈1440p → 4K","Mostly steady","Up to 212 GB","Rockstar’s temporal upscaling reconstructs a 4K image. Independent testing reported occasional minor dips."],["PS5 Pro","PlayStation","30 FPS","≈1440p → 4K via PSSR 2","Mostly steady","Up to 212 GB","PlayStation Spectral Super Resolution improves image clarity. PS5 Pro also adds exclusive ray-traced shadows."],["Xbox Series X","Xbox","30 FPS","≈1440p → 4K","Mostly steady","Up to 212 GB","Rockstar’s temporal upscaling reconstructs a 4K image. Independent testing reported occasional minor dips."],["Xbox Series S","Xbox","30 FPS","720p → 1080p","More variable","Up to 212 GB","AMD FidelityFX Super Resolution (FSR) upscales to 1080p. Expect a softer image and more frequent frame-rate dips."],["PC","Windows","Unknown","Unknown","Unknown","Unknown","Rockstar has yet to announce a PC version, release date or system requirements."]];
 const buttons = document.querySelectorAll('[data-platform]');
 const result = document.querySelector('#results');
 const values = result.querySelectorAll('dd');
@@ -138,6 +192,19 @@ buttons.forEach(button => {
     result.querySelector('.eyebrow').textContent = family;
     values.forEach((value, index) => { value.textContent = specs[index]; });
     result.querySelector('.note span').textContent = specs[4];
+  });
+});
+
+document.querySelectorAll('[data-video]').forEach(button => {
+  button.addEventListener('click', () => {
+    const player = document.createElement('iframe');
+    player.title = button.getAttribute('aria-label');
+    player.src = 'https://www.youtube-nocookie.com/embed/' + button.dataset.video
+      + '?autoplay=1&start=' + button.dataset.start;
+    player.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+    player.allowFullscreen = true;
+    button.replaceWith(player);
+    player.focus();
   });
 });
 </script>
