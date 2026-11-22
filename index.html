@@ -100,6 +100,11 @@ footer strong{color:var(--text)}
 @keyframes hero-fade{0%,42%,100%{opacity:0}52%,90%{opacity:1}}
 .hero-toggle{position:absolute;z-index:3;right:clamp(1rem,4vw,2rem);bottom:1rem;border:1px solid #ffffff55;border-radius:.5rem;background:#110b17e8;padding:.4rem .7rem;font-size:.75rem;font-weight:700}
 @media(max-width:600px){.hero::before{background:linear-gradient(90deg,#09070de0,#100a1490),linear-gradient(0deg,#09070da8,transparent 60%)}.hero .wrap{padding-bottom:4.5rem}}
+
+.hardware{margin-top:1.35rem;padding-top:1.15rem;border-top:1px solid var(--line)}
+.hardware h4{margin:0 0 .75rem;font-size:1rem}
+.hardware dl{grid-template-columns:repeat(3,minmax(0,1fr));margin-bottom:.6rem}
+@media(max-width:720px){.hardware dl{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 </head>
 <body>
@@ -131,6 +136,11 @@ footer strong{color:var(--text)}
 <span class="eyebrow">PlayStation</span><h3>PS5</h3>
 <dl><div><dt>Target FPS</dt><dd>30 FPS</dd></div><div><dt>Resolution</dt><dd>≈1440p → 4K</dd></div><div><dt>Stability</dt><dd>Mostly steady</dd></div><div><dt>Storage</dt><dd>Up to 212 GB</dd></div></dl>
 <p class="note"><strong>Key features and notes</strong><span>Rockstar’s temporal upscaling reconstructs a 4K image. Independent testing reported occasional minor dips.</span></p>
+<section class="hardware" aria-labelledby="hardware-title">
+<h4 id="hardware-title">Console hardware specs</h4>
+<dl><div><dt>CPU</dt><dd>AMD Zen 2 · 8 cores / 16 threads</dd></div><div><dt>GPU</dt><dd>AMD Radeon RDNA-based · ≈10 TFLOPS</dd></div><div><dt>Memory</dt><dd>16 GB GDDR6</dd></div><div><dt>Built-in SSD</dt><dd>825 GB custom SSD</dd></div><div><dt>Disc drive</dt><dd>4K UHD Blu-ray</dd></div></dl>
+<p class="caption"><span>Original PS5 disc model shown. SSD capacity varies by revision.</span> <a href="https://www.playstation.com/content/dam/global_pdc/en-in/corporate/support/manuals/ps5-docs/1200a/CFI-12XXA_PS5_Safety_Guide%24en-in.pdf">Manufacturer specs</a></p>
+</section>
 </div>
 </section>
 <aside class="ad" id="ad-slot-1" aria-label="Advertisement placeholder">AdSense placeholder</aside>
@@ -200,7 +210,57 @@ footer strong{color:var(--text)}
 const platforms = [["PS5","PlayStation","30 FPS","≈1440p → 4K","Mostly steady","Up to 212 GB","Rockstar’s temporal upscaling reconstructs a 4K image. Independent testing reported occasional minor dips."],["PS5 Pro","PlayStation","30 FPS","≈1440p → 4K via PSSR 2","Mostly steady","Up to 212 GB","PlayStation Spectral Super Resolution improves image clarity. PS5 Pro also adds exclusive ray-traced shadows."],["Xbox Series X","Xbox","30 FPS","≈1440p → 4K","Mostly steady","Up to 212 GB","Rockstar’s temporal upscaling reconstructs a 4K image. Independent testing reported occasional minor dips."],["Xbox Series S","Xbox","30 FPS","720p → 1080p","More variable","Up to 212 GB","AMD FidelityFX Super Resolution (FSR) upscales to 1080p. Expect a softer image and more frequent frame-rate dips."],["PC","Windows","Unknown","Unknown","Unknown","Unknown","Rockstar has yet to announce a PC version, release date or system requirements."]];
 const buttons = document.querySelectorAll('[data-platform]');
 const result = document.querySelector('#results');
-const values = result.querySelectorAll('dd');
+const values = result.querySelectorAll(':scope > dl dd');
+const hardware = result.querySelector('.hardware');
+const hardwareValues = hardware.querySelectorAll('dd');
+const hardwareNote = hardware.querySelector('.caption span');
+const hardwareSource = hardware.querySelector('a');
+const consoleHardware = [
+  [
+    [
+      "AMD Zen 2 · 8 cores / 16 threads",
+      "AMD Radeon RDNA-based · ≈10 TFLOPS",
+      "16 GB GDDR6",
+      "825 GB custom SSD",
+      "4K UHD Blu-ray"
+    ],
+    "Original PS5 disc model shown. SSD capacity varies by revision.",
+    "https://www.playstation.com/content/dam/global_pdc/en-in/corporate/support/manuals/ps5-docs/1200a/CFI-12XXA_PS5_Safety_Guide%24en-in.pdf"
+  ],
+  [
+    [
+      "AMD Zen 2 · 8 cores / 16 threads",
+      "AMD Radeon RDNA-based · 16.7 TFLOPS",
+      "16 GB GDDR6 + 2 GB DDR5",
+      "2 TB custom SSD",
+      "Optional add-on"
+    ],
+    "The disc drive is sold separately.",
+    "https://www.playstation.com/content/dam/global_pdc/en/corporate/support/manuals/ps5-docs/7000/CFI-7019_PS5_Safety_Guide_Web%24en.pdf"
+  ],
+  [
+    [
+      "AMD Zen 2 · 8 cores",
+      "Custom AMD RDNA 2 · 12 TFLOPS",
+      "16 GB GDDR6",
+      "1 TB custom NVMe SSD",
+      "4K UHD Blu-ray"
+    ],
+    "Specs shown for the Carbon Black disc model.",
+    "https://www.xbox.com/en-IN/consoles/xbox-series-x"
+  ],
+  [
+    [
+      "AMD Zen 2 · 8 cores",
+      "Custom AMD RDNA 2 · 4 TFLOPS",
+      "10 GB GDDR6",
+      "512 GB or 1 TB custom NVMe SSD",
+      "Digital only"
+    ],
+    "SSD capacity depends on the edition.",
+    "https://www.xbox.com/en-in/consoles/xbox-series-s?xr=shellnav"
+  ]
+];
 
 buttons.forEach(button => {
   button.addEventListener('click', () => {
@@ -210,6 +270,15 @@ buttons.forEach(button => {
     result.querySelector('.eyebrow').textContent = family;
     values.forEach((value, index) => { value.textContent = specs[index]; });
     result.querySelector('.note span').textContent = specs[4];
+
+    const consoleSpecs = consoleHardware[Number(button.dataset.platform)];
+    hardware.hidden = !consoleSpecs;
+    if (consoleSpecs) {
+      const [details, note, source] = consoleSpecs;
+      hardwareValues.forEach((value, index) => { value.textContent = details[index]; });
+      hardwareNote.textContent = note;
+      hardwareSource.href = source;
+    }
   });
 });
 
