@@ -89,16 +89,34 @@ footer strong{color:var(--text)}
 .video-play:hover span{background:#95102e}
 @media(max-width:720px){.media-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:500px){.media-grid{grid-template-columns:minmax(0,1fr)}header .wrap{flex-wrap:wrap}.cards img{height:76px}}
+
+.hero::before{z-index:1;background:linear-gradient(90deg,#09070de8 0%,#100a14b8 48%,#100a1459 100%),linear-gradient(0deg,#09070dbd,transparent 58%);mask-image:none}
+.hero .wrap{z-index:2}
+.hero-slides,.hero-slides img{position:absolute;inset:0;width:100%;height:100%}
+.hero-slides img{object-fit:cover;object-position:center 40%}
+.hero-slides img+img{opacity:0}
+.hero.is-playing .hero-slides img+img{animation:hero-fade 14s ease-in-out infinite}
+.hero.is-paused .hero-slides img+img{animation-play-state:paused}
+@keyframes hero-fade{0%,42%,100%{opacity:0}52%,90%{opacity:1}}
+.hero-toggle{position:absolute;z-index:3;right:clamp(1rem,4vw,2rem);bottom:1rem;border:1px solid #ffffff55;border-radius:.5rem;background:#110b17e8;padding:.4rem .7rem;font-size:.75rem;font-weight:700}
+@media(max-width:600px){.hero::before{background:linear-gradient(90deg,#09070de0,#100a1490),linear-gradient(0deg,#09070da8,transparent 60%)}.hero .wrap{padding-bottom:4.5rem}}
 </style>
 </head>
 <body>
 <header><div class="wrap"><a class="brand" href="./">GTA <span>VI</span></a><nav aria-label="Page sections"><a href="#checker">Checker</a><a href="#benchmarks">Benchmarks</a><a href="#videos">Videos</a><a href="#gallery">Gallery</a><a href="#faq">FAQ</a></nav></div></header>
 <main>
-<section class="hero" aria-labelledby="title"><div class="wrap">
+<section class="hero" aria-labelledby="title">
+<div class="hero-slides" aria-hidden="true">
+<img src="https://www.rockstargames.com/VI/_next/static/media/Jason_and_Lucia_14_Mobile.17zv0lmevzbgs.jpg?akim=1&amp;imwidth=960" alt="" fetchpriority="high" decoding="async">
+<img src="https://www.rockstargames.com/VI/_next/static/media/launch-trailer-mobile.11.007xolt5y2.jpg?akim=1&amp;imwidth=960" alt="" decoding="async">
+</div>
+<div class="wrap">
 <time datetime="2026-11-22">Updated November 22, 2026</time>
 <h1 id="title">GTA 6 <span>Performance Checker</span></h1>
 <p>Compare frame rate, resolution, stability and storage. Pick your platform to see how GTA VI runs.</p>
-</div></section>
+</div>
+<button type="button" class="hero-toggle" hidden>Pause slideshow</button>
+</section>
 <div class="wrap">
 <section id="checker" aria-labelledby="checker-title">
 <h2 id="checker-title">Choose your platform</h2>
@@ -206,6 +224,24 @@ document.querySelectorAll('[data-video]').forEach(button => {
     button.replaceWith(player);
     player.focus();
   });
+});
+
+const hero = document.querySelector('.hero');
+const slideToggle = document.querySelector('.hero-toggle');
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+function setSlideshowPreference() {
+  hero.classList.toggle('is-playing', !reducedMotion.matches);
+  hero.classList.remove('is-paused');
+  slideToggle.hidden = reducedMotion.matches;
+  slideToggle.textContent = 'Pause slideshow';
+}
+
+setSlideshowPreference();
+reducedMotion.addEventListener('change', setSlideshowPreference);
+slideToggle.addEventListener('click', () => {
+  const paused = hero.classList.toggle('is-paused');
+  slideToggle.textContent = paused ? 'Play slideshow' : 'Pause slideshow';
 });
 </script>
 </body>
